@@ -1,0 +1,33 @@
+{
+  "name": "should-spies",
+  "version": "1.0.0",
+  "description": "Small spies for should.js",
+  "main": "should-spies.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shouldjs/spies.git"
+  },
+  "keywords": [
+    "should",
+    "spy",
+    "spies"
+  ],
+  "author": "Denis Bardadym <bardadymchik@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shouldjs/spies/issues"
+  },
+  "peerDependency": {
+    "should": ">= 11.1.0"
+  },
+  "homepage": "https://github.com/shouldjs/spies#readme",
+  "devDependencies": {
+    "eslint": "^3.2.2",
+    "eslint-config-shouldjs": "^1.0.2",
+    "mocha": "^3.0.2",
+    "should": "^11.0.0"
+  }
+}
