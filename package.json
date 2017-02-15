@@ -1,6 +1,6 @@
 {
   "name": "should-spies",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Small spies for should.js",
   "main": "should-spies.js",
   "scripts": {
