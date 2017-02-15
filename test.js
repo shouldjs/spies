@@ -25,3 +25,14 @@ it('should allow to assert on spy state', function() {
 
   spy.should.be.calledOn(obj);
 });
+
+it('should check call order between 2 spies', function() {
+  var spy1 = should.spy();
+  var spy2 = should.spy();
+
+  spy1();
+  spy2();
+
+  spy2.should.be.calledAfter(spy1);
+  spy1.should.be.calledBefore(spy2);
+});

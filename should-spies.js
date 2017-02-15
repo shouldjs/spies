@@ -13,11 +13,13 @@
 
   var ARRAY_SLICE = Array.prototype.slice;
 
+  var callId = 0;
+
 
   function createProxyFunction(func) {
     var proxyFunc = function() {
       var args = ARRAY_SLICE.call(arguments);
-      var call = { args: args, context: this };
+      var call = { args: args, context: this, id: callId++ };
       proxyFunc.calls.push(call);
       return func.apply(this, args);
     };
@@ -115,9 +117,6 @@
 
   spy.throws = throws;
 
-
-
-
   var Assertion = should.Assertion;
 
 
@@ -162,5 +161,33 @@
     should(lastCall.args).be.eql(ARRAY_SLICE.call(arguments));
   });
 
+  Assertion.add('calledBefore', function(otherSpy) {
+    this.params = { operator: 'to be called before ' + should.format(otherSpy) };
 
+    var thisSpy = this.obj;
+
+    thisSpy.should.be.called();
+    if (!otherSpy.called) {
+      return;
+    }
+
+    var thisFirstCall = thisSpy.calls[0];
+    var otherLastCall = otherSpy.lastCall;
+
+    this.assert(thisFirstCall.id < otherLastCall.id);
+  });
+
+  Assertion.add('calledAfter', function(otherSpy) {
+    this.params = { operator: 'to be called after ' + should.format(otherSpy) };
+
+    var thisSpy = this.obj;
+
+    thisSpy.should.be.called();
+    otherSpy.should.be.called();
+
+    var thisLastCall = thisSpy.lastCall;
+    var otherLastCall = otherSpy.lastCall;
+
+    this.assert(thisLastCall.id > otherLastCall.id);
+  });
 }));
